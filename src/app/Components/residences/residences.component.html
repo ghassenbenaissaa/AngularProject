@@ -22,6 +22,7 @@
             <button class="btn btn-outline-primary" (click)="showLocation(r)">Show Location</button>
             <td><button [ngClass]="isFavoris(r) ? 'btn btn-danger' : 'btn btn-outline-danger'" (click)="addToFavoris(r)" >{{isFavoris(r) ?'👎🏿 Dislike' :'👍🏿 Like'}}</button></td>
             <td><button class="btn btn-primary" [routerLink]="['/details/',r.id]">Details</button></td>
+            <td><button class="btn btn-primary" [routerLink]="['/apartments/',r.id]">View Apartments</button></td>
         </tr>
     </tbody>
 </table>

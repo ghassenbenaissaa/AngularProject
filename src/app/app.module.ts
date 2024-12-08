@@ -11,8 +11,8 @@ import { FooterComponent } from './Components/footer/footer.component';
 import { ResidenceDetailsComponent } from './Components/residences/residence-details/residence-details.component';
 import { AddResidenceComponent } from './Components/residences/add-residence/add-residence.component';
 import { ApartmentsComponent } from './Components/apartments/apartments.component';
-import { AddApartmentComponent } from './Components/Apartments/add-apartment/add-apartment.component';
-import { ApartmentsByResidencComponent } from './Components/Apartments/apartments-by-residenc/apartments-by-residenc.component';
+import { AddApartmentComponent } from './Components/apartments/add-apartment/add-apartment.component';
+import { ApartmentsByResidencComponent } from './Components/apartments/apartments-by-residenc/apartments-by-residenc.component';
 
 @NgModule({
   declarations: [
