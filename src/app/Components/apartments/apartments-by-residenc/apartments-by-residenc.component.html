@@ -1,30 +1,24 @@
-<table class="table">
-    <thead>
-    <tr>
-        <th>Apartment Number</th>
-        <th>Floor Number</th>
-        <th>Surface</th>
-        <th>Terrace</th>
-        <th>Surface terrace</th>
-        <th>Category</th>
-        <th>Residence</th>
-    </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let a of filteredApartments">
-            <td>{{ a.apartNum }}</td>
-            <td>{{ a.floorNum }}</td>
-            <td>{{ a.surface }}</td>
-            <td>{{ a.terrace }}</td>
-            <td>{{ a.surfaceterrace }}</td>
-            <td>{{ a.category }}</td>
-            <td>{{ a.ResidenceId }}</td>
-          </tr>
-    </tbody>
-</table>
 <div class="container">
     <div class="row">
-        <button class="btn btn-primary" [routerLink]="['/aprtment/add']">Add Apatment</button>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Apart Num</th>
+                    <th>Floor Num</th>
+                    <th>Category</th>
+                    <th>Résidence</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of apartments">
+                    <td>{{a.apartNum}}</td>
+                    <td>{{a.floorNum}}</td>
+                    <td>{{a.category}}</td>
+                    <td>{{getResidence(a.ResidenceId)}}</td>
+                    <td><button class="btn btn-primary" [routerLink]="['/apartment/details/',a.ResidenceId]">Détails</button></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
-

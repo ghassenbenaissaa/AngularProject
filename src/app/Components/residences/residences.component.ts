@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Residence } from 'src/app/Models/residence';
+import { ResidenceService } from 'src/app/services/residence.service';
 
 @Component({
   selector: 'app-residences',
@@ -7,20 +8,16 @@ import { Residence } from 'src/app/Models/residence';
   styleUrls: ['./residences.component.css']
 })
 export class ResidencesComponent {
+
+  constructor(private _residenceService:ResidenceService){
+    this.residences=this._residenceService.residences; //residence est le variable local
+  }
+
   title:string = "Liste des résidences"
   selectedResidence: Residence = new Residence();
   hide: boolean = true;
   searchText:string = ''
-  residences : Residence[] = [{id:1,"name": "El fel","address":"Borj Cedria",
-    "image":"../../assets/Images/R1.jpg", status: "Disponible"},
-    {id:2,"name": "El yasmine",
-    "address":"Ezzahra","image":"../../assets/Images/R2.jpeg", status:
-    "Disponible" },
-    {id:3,"name": "El Arij",
-    "address":"Rades","image":"../../assets/Images/R3.jpeg", status:
-    "Vendu"},
-    {id:4,"name": "El Anber","address":"inconnu",
-    "image":"../../assets/Images/R4.jpeg", status: "En Construction"}];
+  residences : Residence[] = [];
 
     showLocation(r: Residence){
       this.hide = false;

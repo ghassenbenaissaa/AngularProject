@@ -2,6 +2,11 @@
 <div class="row">
     <input type="text" name="search" [(ngModel)]="searchText">
 </div>
+<div class="row">
+    <div class="col-4">
+    <button class="btn btn-outline-primary" routerLink="/residence/add">Add residences</button>
+</div>
+</div>
 <table class="table">
     <thead>
     <tr>
@@ -23,6 +28,7 @@
             <td><button [ngClass]="isFavoris(r) ? 'btn btn-danger' : 'btn btn-outline-danger'" (click)="addToFavoris(r)" >{{isFavoris(r) ?'👎🏿 Dislike' :'👍🏿 Like'}}</button></td>
             <td><button class="btn btn-primary" [routerLink]="['/details/',r.id]">Details</button></td>
             <td><button class="btn btn-primary" [routerLink]="['/apartments/',r.id]">View Apartments</button></td>
+            <td><button class="btn btn-outline-primary" [routerLink]="['/apartment/add/',r.id]">Add apartment</button></td>
         </tr>
     </tbody>
 </table>

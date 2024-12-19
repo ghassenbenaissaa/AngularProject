@@ -12,7 +12,7 @@ import { AddResidenceComponent } from './Components/residences/add-residence/add
 const routes: Routes = [
   {path: 'apartments',component:ApartmentsComponent},
   {path:'apartments/:id', component:ApartmentsByResidencComponent},
-  {path:'aprtment/add', component:AddApartmentComponent},
+  {path:'apartment/add/:id', component:AddApartmentComponent},
   {path: 'residences',component:ResidencesComponent},
   {path:'',redirectTo:'/residences',pathMatch:'full'},
   {path:'details/:id', component:ResidenceDetailsComponent},

@@ -1,75 +1,81 @@
-<!--<input [formControl]="name">
-<input [formControl]="address">
-<input [formControl]="image">
-<input [formControl]="status">
-<input type="submit" value="Submit" (click)="add()">-->
 <div class="container">
     <div class="row">
-        Add new apartment
+        <h3>Add new apartment</h3>
     </div>
     <div class="row">
         <form [formGroup]="apartment">
             <div class="mb-3">
-                <label>Apartment number:</label>
-                <input type="number" class="form-control" formControlName="apartNum">
-            </div>
-            <div class="alert alert-danger" *ngIf="apartNum!.invalid && (apartNum!.touched || apartNum!.dirty)">
-                <div *ngIf="apartNum!.hasError('required')">Apartment Number is required!</div>
-            </div>
-            <div class="mb-3">
-                <label>Floor number:</label>
-                <input type="number" class="form-control" formControlName="floorNum">
-            </div>
-            <div class="alert alert-danger" *ngIf="floorNum!.invalid && (floorNum!.touched || floorNum!.dirty)">
-                <div *ngIf="floorNum!.hasError('required')">Floor Number is required!</div>
-            </div>
-            <div class="mb-3">
-                <label>Surface:</label>
-                <input type="number" class="form-control" formControlName="surface">
-            </div>
-            <div class="alert alert-danger" *ngIf="surface!.invalid && (surface!.touched || surface!.dirty)">
-                <div *ngIf="surface!.hasError('required')">Surface is required!</div>
-            </div>
-            <div class="mb-3">
-                <label>Terrace:</label>
-                <div>
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" id="terraceYes" formControlName="terrace" [value]="true">
-                        <label for="terraceYes" class="form-check-label">Oui</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" id="terraceNo" formControlName="terrace" [value]="false">
-                        <label for="terraceNo" class="form-check-label">Non</label>
-                    </div>
+                <label>Apartment Number :</label>
+                <input class="form-control" formControlName="apartNum">
+                <div class="alert alert-danger" *ngIf="apartment.get('apartNum')!.invalid 
+                && (apartment.get('apartNum')!.touched||apartment.get('apartNum')!.dirty)">
+                    <div *ngIf="apartment.get('apartNum')!.hasError('required')">
+                        Apartment number is required</div>
+                    <div *ngIf="apartment.get('apartNum')!.hasError('pattern')">
+                        Apartment number invalid</div>
                 </div>
             </div>
-            <div class="alert alert-danger" *ngIf="terrace!.invalid && (terrace!.touched || terrace!.dirty)">
-                <div *ngIf="terrace!.hasError('required')">Terrace is required!</div>
+            <div class="mb-3">
+                <label>Floor Number :</label>
+                <input class="form-control" formControlName="floorNum">
+                <div class="alert alert-danger" *ngIf="apartment.get('floorNum')!.invalid 
+                            && (apartment.get('floorNum')!.touched||apartment.get('floorNum')!.dirty)">
+                    <div *ngIf="apartment.get('floorNum')!.hasError('required')">
+                        Floor number is required</div>
+                    <div *ngIf="apartment.get('floorNum')!.hasError('pattern')">
+                        Floor number invalid</div>
+                </div>
             </div>
             <div class="mb-3">
-                <label>Surface Terrace:</label>
-                <input type="number" class="form-control" formControlName="surfaceterrace" [disabled]="apartment.get('terrace')?.value !== true">
-            </div>
-            <div class="alert alert-danger" *ngIf="surfaceterrace!.invalid && (surfaceterrace!.touched || surfaceterrace!.dirty)">
-                <div *ngIf="surfaceterrace!.hasError('required')">Surface Terrace is required!</div>
+                <label>Surface :</label>
+                <input class="form-control" formControlName="surface">
+                <div class="alert alert-danger" *ngIf="apartment.get('surface')!.invalid 
+                                        && (apartment.get('surface')!.touched||apartment.get('surface')!.dirty)">
+                    <div *ngIf="apartment.get('surface')!.hasError('required')">
+                        Surface is required</div>
+                    <div *ngIf="apartment.get('surface')!.hasError('pattern')">
+                        Surface invalid</div>
+                </div>
             </div>
             <div class="mb-3">
-                <label>Category</label>
+                <label>Surface :</label>
+                <input type="radio" formControlName="terrace" value="oui">true
+                <input type="radio" formControlName="terrace" value="non">false
+                <div class="alert alert-danger"
+                    *ngIf="apartment.get('terrace')!.invalid 
+                                                    && (apartment.get('terrace')!.touched||apartment.get('terrace')!.dirty)">
+                    <div *ngIf="apartment.get('terrace')!.hasError('required')">
+                        Surface is required</div>
+                </div>
+            </div>
+            <div class="mb-3" *ngIf="apartment.get('terrace')!.value == 'oui'">
+                <label>Surface terrace:</label>
+                <input class="form-control" formControlName="surfaceterrace">
+                <div class="alert alert-danger"
+                    *ngIf="apartment.get('surfaceterrace')!.invalid 
+                                                    && (apartment.get('surfaceterrace')!.touched||apartment.get('surfaceterrace')!.dirty)">
+
+                    <div *ngIf="apartment.get('surfaceterrace')!.hasError('pattern')">
+                        Surface terrace invalid</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label>Category:</label>
                 <select class="form-select" formControlName="category">
-                    <option>S+1</option>
-                    <option>S+2</option>
-                    <option>S+3</option>
+                    <option value="s+1">S+1</option>
+                    <option value="s+2">S+2</option>
+                    <option value="s+3">S+3</option>
+                    <option value="s+4">S+4</option>
                 </select>
+                <div class="alert alert-danger" *ngIf="apartment.get('category')!.invalid 
+                    && (apartment.get('category')!.touched||apartment.get('category')!.dirty)">
+
+                    <div *ngIf="apartment.get('category')!.hasError('required')">
+                        Category is required</div>
+                </div>
             </div>
             <div class="mb-3">
-                <label>Residence Id:</label>
-                <input type="number" class="form-control" formControlName="ResidenceId">
-            </div>
-            <div class="alert alert-danger" *ngIf="ResidenceId!.invalid && (ResidenceId!.touched || ResidenceId!.dirty)">
-                <div *ngIf="ResidenceId!.hasError('required')">Residence Id is required!</div>
-            </div>
-            <div class="mb-3">
-                <input type="submit" class="btn btn-outline-primary" (click)="add()" value="Add apartment" [disabled]="apartment.invalid">
+                <input type="sumbit" value="Submit" class="btn btn-outline-success" (click)="add()">
             </div>
         </form>
     </div>

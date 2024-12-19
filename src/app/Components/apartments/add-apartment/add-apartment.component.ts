@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ApartmentService } from 'src/app/services/apartment.service';
 
 @Component({
   selector: 'app-add-apartment',
@@ -7,38 +9,37 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-apartment.component.css']
 })
 export class AddApartmentComponent {
-  apartment : FormGroup = new FormGroup ({
-    apartNum : new FormControl('',[Validators.required]),
-    floorNum : new FormControl('',[Validators.required]),
-    surface : new FormControl('',[Validators.required]),
-    terrace : new FormControl('',[]),
-    surfaceterrace : new FormControl('',[Validators.required]),
-    category : new FormControl('S+1',[]),
-    ResidenceId : new FormControl('',[Validators.required]),
-  })
-  get apartNum(){
-    return this.apartment.get('apartNum');
+  constructor(private _activated: ActivatedRoute,private _apartmentService:ApartmentService,private _router:Router) {}
+  apartment!: FormGroup;
+
+  ngOnInit(): void {
+    this.apartment = new FormGroup({
+      apartNum: new FormControl('', [
+        Validators.required,
+        Validators.pattern('[0-9]+'),
+      ]),
+      floorNum: new FormControl('', [
+        Validators.required,
+        Validators.pattern('[0-9]+'),
+      ]),
+      surface: new FormControl('', [
+        Validators.required,
+        Validators.pattern('[0-9]+'),
+      ]),
+      terrace: new FormControl('', [Validators.required]),
+      surfaceterrace: new FormControl('', [Validators.pattern('[0-9]+')]),
+      category: new FormControl('', [Validators.required]),
+    });
+    this.apartment.addControl('ResidenceId', new FormControl());
+    this.apartment.patchValue({
+      ResidenceId: this._activated.snapshot.params['id'],
+    });
   }
-  get floorNum(){
-    return this.apartment.get('floorNum');
+
+  add() {
+    console.log(this.apartment);
+    this._apartmentService.addApartment(this.apartment.getRawValue());
+    this._router.navigate(['/apartments'])
+
   }
-  get surface(){
-    return this.apartment.get('surface');
-  }
-  get terrace(){
-    return this.apartment.get('terrace');
-  }
-  get surfaceterrace(){
-    return this.apartment.get('surfaceterrace');
-  }
-  get category(){
-    return this.apartment.get('category');
-  }
-  get ResidenceId(){
-    return this.apartment.get('ResidenceId');
-  }
-add(){
-  console.log(this.apartment.value);
-  this.apartment.reset()
-}
 }

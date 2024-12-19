@@ -1,26 +1,20 @@
 import { Component } from '@angular/core';
 import { Residence } from '../../../Models/residence';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ResidenceService } from 'src/app/services/residence.service';
 @Component({
   selector: 'app-residence-details',
   templateUrl: './residence-details.component.html',
   styleUrls: ['./residence-details.component.css']
 })
 export class ResidenceDetailsComponent {
-  residences : Residence[] = [{id:1,"name": "El fel","address":"Borj Cedria",
-    "image":"../../assets/Images/R1.jpg", status: "Disponible"},
-    {id:2,"name": "El yasmine",
-    "address":"Ezzahra","image":"../../assets/Images/R2.jpeg", status:
-    "Disponible" },
-    {id:3,"name": "El Arij",
-    "address":"Rades","image":"../../assets/Images/R3.jpeg", status:
-    "Vendu"},
-    {id:4,"name": "El Anber","address":"inconnu",
-    "image":"../../assets/Images/R4.jpeg", status: "En Construction"}];
+
+  residences : Residence[] = [];
   id!: number;
   selectedResidence!: Residence;
   currentIndex:number=0;
-  constructor(private ac:ActivatedRoute, private r:Router){
+  constructor(private ac:ActivatedRoute, private r:Router, private _residenceService:ResidenceService){
+    this.residences=this._residenceService.residences;
     this.id = this.ac.snapshot.params['id'];
     this.selectedResidence = this.residences.find((r)=>r.id == this.id)!
     this.currentIndex = this.residences.findIndex((r)=> r.id == this.id)
